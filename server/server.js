@@ -9,3 +9,7 @@ const io = require('socket.io')(server);
 server.listen(8080, () =>{
     console.log("server running on "+8080);
  });
+
+ io.on('connection', (socket) => {
+    console.log('someone connected');
+});
