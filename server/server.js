@@ -15,9 +15,9 @@ io.on('connection', (socket) => {
     counter++;
     console.log(counter + 'someone connected');
 
-    socket.on('sendToAll', (message) =>{
-        console.log("OKOKOK");
-        io.emit("displayMessage", (message));
+    socket.on('sendToAll', (obj) =>{
+        console.log(obj.message, obj.userName);
+        io.emit("displayMessage", (obj));
     });
 
     socket.on('sendToMe', (message) =>{
