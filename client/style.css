@@ -1,0 +1,49 @@
+.row{
+    background-color: aqua;
+}
+
+#main-left{
+    background-color: white;
+    padding: 5px;
+    border: solid black;
+    height: 650px;
+}
+
+#input-search{
+    margin-top: 2px;
+}
+
+#friends{
+    background-color: blue;
+    height: 580px;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+.friend-box{
+    background-color: rgb(185, 15, 15);
+    height: 50px;
+}
+
+#main-right{
+    background-color: white;
+    padding: 5px;
+    border: solid 2px black;
+    height: 650px;
+}
+
+.chat{
+    height: 530px;
+    background-color: yellow;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.test{
+    background-color: white;
+    width: 250px;
+}
+
+.time{
+    font-size: small;
+}
