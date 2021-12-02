@@ -19,5 +19,10 @@ io.on('connection', (socket) => {
         console.log("OKOKOK");
         io.emit("displayMessage", (message));
     });
+
+    socket.on('sendToMe', (message) =>{
+        console.log("OKOKOK");
+        socket.emit("displayMessage", (message));
+    });
 });
 
