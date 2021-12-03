@@ -95,16 +95,62 @@ sendToMe.addEventListener('click', () => {
 sendData.addEventListener('click', () => {
     socket.emit('sendData', {userName: userName.value, imgColor: img.style.backgroundColor});
     console.log(img.style.backgroundColor);
+    users.push(userName.value);
 })
 
+
+
 socket.on('displayMessage', (obj) => {
-    target.innerHTML += "<div class='test'>"+ 
-    "<img src='/img/user.png' id='littleImg' style='background-color:"+obj.imgColor+";'>      <i>" + obj.userName + 
-    "</i><br> <p>" + obj.message+ "     " + hs + ":"+ min + "</p></div><br>";
+    
+    let messageDiv = document.createElement('div');
+    messageDiv.classList.add('text');
+    target.appendChild(messageDiv);
+
+    let userImage = document.createElement('img');
+    userImage.setAttribute("id", "littleImg");
+    userImage.src = '/img/user.png';
+    userImage.style.backgroundColor = obj.imgColor;
+    messageDiv.appendChild(userImage);
+
+    let userMessage = document.createElement('p');
+    userMessage.innerHTML = "<i><b>" + obj.userName +":  </i></b>" + obj.message+ "     " + hs + ":"+ min;
+    messageDiv.appendChild(userMessage);
 });
 
 socket.on('displayName', (obj) =>{
-    showUserName.innerHTML = "<img src='/img/user.png' id='littleImg' style='background-color:"+obj.imgColor+";'>          " +  
+
+    let userInfo = document.createElement('div');
+    userInfo.classList.add('friend');
+    showFriends.appendChild(userInfo);
+
+
+    let userImage1 = document.createElement('img');
+    userImage1.setAttribute("id", "littleImg");
+    userImage1.src = '/img/user.png';
+    userImage1.style.backgroundColor = obj.imgColor;
+    showUserName.appendChild(userImage1); 
     userName.value ;
-    showFriends.innerHTML += "<div> <img src='/img/user.png' id='littleImg' style='background-color:"+obj.imgColor+";'>          " + obj.userName + "</div>";
+
+    let user1 = document.createElement('p');
+    user1.innerHTML = obj.userName
+    
+    userInfo.appendChild(userImage1); 
+    userInfo.appendChild(user1);
+    
+
+    let userImage2 = document.createElement('img');
+    userImage2.setAttribute("id", "littleImg");
+    userImage2.src = '/img/user.png';
+    userImage2.style.backgroundColor = obj.imgColor;
+    showUserName.appendChild(userImage2); 
+
+    let user2 = document.createElement('p');
+    user2.innerHTML = obj.userName
+
+    showUserName.appendChild(userImage2); 
+    showUserName.appendChild(user2);
+
+    // showFriends.innerHTML += "<div class='friend'> <img src='/img/user.png' id='littleImg' style='background-color:"+obj.imgColor+";'>          " 
+    // + obj.userName + "</div>";
 })
+
