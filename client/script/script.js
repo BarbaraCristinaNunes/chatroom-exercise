@@ -45,6 +45,11 @@ let img = document.getElementById("userImg");
 let select = document.getElementById("randomColor");
 let option = document.getElementsByClassName("color");
 let id = 0;
+let color = "";
+
+
+// let value = select.options[select.selectedIndex].value;
+
 
 let colors = ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
 "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
@@ -89,6 +94,16 @@ let colors = ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,
 
 function createDropDown(){
     for(let i = 0; i < colors.length; i++){
-        select.innerHTML += "<option class='color' value='"+id++ +"'>"+ colors[i] +"</option>";
+        select.innerHTML += "<option class='color' value='"+ colors[i] +"'>"+ colors[i] +"</option>";
     }
 }
+createDropDown()
+
+console.log(color);
+select.addEventListener('change', () => { 
+    console.log("select.value:", select.value); 
+    color = select.value;
+    console.log(color);
+    img.style.backgroundColor = color;
+});
+
