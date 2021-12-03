@@ -15,8 +15,8 @@ io.on('connection', (socket) => {
     counter++;
     console.log(counter + 'someone connected');
 
-    socket.on('sendData', (name) => {
-        io.emit("displayName", (name));
+    socket.on('sendData', (obj) => {
+        io.emit("displayName", (obj));
     })
 
     socket.on('sendToAll', (obj) =>{
