@@ -15,14 +15,18 @@ io.on('connection', (socket) => {
     counter++;
     console.log(counter + 'someone connected');
 
+    socket.on('sendData', (name) => {
+        io.emit("displayName", (name));
+    })
+
     socket.on('sendToAll', (obj) =>{
         console.log(obj.message, obj.userName);
         io.emit("displayMessage", (obj));
     });
 
-    socket.on('sendToMe', (message) =>{
+    socket.on('sendToMe', (obj) =>{
         console.log("OKOKOK");
-        socket.emit("displayMessage", (message));
+        socket.emit("displayMessage", (obj));
     });
 });
 
