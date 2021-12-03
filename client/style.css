@@ -44,9 +44,13 @@
     margin-bottom: 10px;
 }
 
-.test{
+.text{
     background-color: white;
-    width: 250px;
+    border: solid black;
+    margin-left: 9px;
+    margin-right: 9px;
+    margin-top: 5px;
+
 }
 
 .time{
@@ -84,5 +88,42 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    margin-left: 5px;
 
 }
+
+#randomColor{
+    margin-top: 30px;
+    height: 50px;
+}
+#send-data{
+    margin-top: 30px;
+    margin-right: 5px;
+    height: 50px;
+}
+.friend{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+width
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(128, 128, 128, 0.479);
+    border-radius: 15px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(221, 42, 221);
+    border-radius: 10px;
+  }
