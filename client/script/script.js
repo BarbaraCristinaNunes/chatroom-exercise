@@ -1,55 +1,6 @@
-let socket = io.connect();
-
-let target = document.getElementById("target");
-let message = document.getElementById("message");
-const sendToAll = document.getElementById("sendToAll");
-const sendToMe = document.getElementById("sendToMe");
-const sendData = document.getElementById("send-data");
-let userName = document.getElementById("search");
-let d = new Date;
-let hs = d.getHours();
-let min = d.getMinutes();
-let showFriends = document.getElementById("all-users");
-let showUserName = document.getElementById("user-name");
-
-let users = [];
-
-console.log(message)
-
-sendToAll.addEventListener('click', () => {
-    socket.emit('sendToAll', {message: message.value, userName: userName.value});
-});
-
-sendToMe.addEventListener('click', () => {
-    socket.emit('sendToMe', {message: message.value, userName: userName.value});
-});
-
-sendData.addEventListener('click', () => {
-    socket.emit('sendData', (userName.value));
-    showUserName.innerHTML = userName.value;
-})
-
-socket.on('displayMessage', (obj) => {
-    target.innerHTML += "<div class='test'>"+ "<p><i>" + obj.userName + "</i></p>" + obj.message+ "     " + hs + ":"+ min + "</div><br>";
-    showFriends.innerHTML = userName.value;
-});
-
-socket.on('displayName', (name) =>{
-    showFriends.innerHTML += "<p>" + name + "</p>";
-})
 
 // ----------------------------------------------------------------------------------------------------------
 // code to build the dropdown and get this information
-
-let img = document.getElementById("userImg");
-let select = document.getElementById("randomColor");
-let option = document.getElementsByClassName("color");
-let id = 0;
-let color = "";
-
-
-// let value = select.options[select.selectedIndex].value;
-
 
 let colors = ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
 "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
@@ -92,6 +43,13 @@ let colors = ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,
 "#f812b3", "#b17fc9", "#8d6c2f", "#d3277a", "#2ca1ae", "#9685eb", "#8a96c6",
 "#dba2e6", "#76fc1b", "#608fa4", "#20f6ba", "#07d7f6", "#dce77a", "#77ecca"];
 
+let img = document.getElementById("userImg");
+let select = document.getElementById("randomColor");
+let option = document.getElementsByClassName("color");
+let id = 0;
+let color = "#dd93fd";
+img.style.backgroundColor = color;
+
 function createDropDown(){
     for(let i = 0; i < colors.length; i++){
         select.innerHTML += "<option class='color' value='"+ colors[i] +"'>"+ colors[i] +"</option>";
@@ -99,11 +57,54 @@ function createDropDown(){
 }
 createDropDown()
 
-console.log(color);
+console.log("first", img.style.backgroundColor);
+
 select.addEventListener('change', () => { 
     console.log("select.value:", select.value); 
     color = select.value;
-    console.log(color);
+    console.log("addeventlistener", color);
     img.style.backgroundColor = color;
 });
 
+
+let socket = io.connect();
+
+let target = document.getElementById("target");
+let message = document.getElementById("message");
+const sendToAll = document.getElementById("sendToAll");
+const sendToMe = document.getElementById("sendToMe");
+const sendData = document.getElementById("send-data");
+let userName = document.getElementById("search");
+let d = new Date;
+let hs = d.getHours();
+let min = d.getMinutes();
+let showFriends = document.getElementById("all-users");
+let showUserName = document.getElementById("user-name");
+
+let users = [];
+
+
+sendToAll.addEventListener('click', () => {
+    socket.emit('sendToAll', {message: message.value, userName: userName.value, imgColor: img.style.backgroundColor});
+});
+
+sendToMe.addEventListener('click', () => {
+    socket.emit('sendToMe', {message: message.value, userName: userName.value, imgColor: img.style.backgroundColor});
+});
+
+sendData.addEventListener('click', () => {
+    socket.emit('sendData', {userName: userName.value, imgColor: img.style.backgroundColor});
+    console.log(img.style.backgroundColor);
+})
+
+socket.on('displayMessage', (obj) => {
+    target.innerHTML += "<div class='test'>"+ 
+    "<img src='/img/user.png' id='littleImg' style='background-color:"+obj.imgColor+";'>      <i>" + obj.userName + 
+    "</i><br> <p>" + obj.message+ "     " + hs + ":"+ min + "</p></div><br>";
+});
+
+socket.on('displayName', (obj) =>{
+    showUserName.innerHTML = "<img src='/img/user.png' id='littleImg' style='background-color:"+obj.imgColor+";'>          " +  
+    userName.value ;
+    showFriends.innerHTML += "<div> <img src='/img/user.png' id='littleImg' style='background-color:"+obj.imgColor+";'>          " + obj.userName + "</div>";
+})
