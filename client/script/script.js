@@ -83,6 +83,7 @@ let showUserName = document.getElementById("user-name");
 
 let users = [];
 
+socket.on('getSocket', (socket) )
 
 sendToAll.addEventListener('click', () => {
     socket.emit('sendToAll', {message: message.value, userName: userName.value, imgColor: img.style.backgroundColor});

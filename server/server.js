@@ -14,6 +14,7 @@ server.listen(8080, () =>{
 io.on('connection', (socket) => {
     counter++;
     console.log(counter + 'someone connected');
+    console.log(socket.id)
 
     socket.on('sendData', (obj) => {
         io.emit("displayName", (obj));
@@ -28,5 +29,9 @@ io.on('connection', (socket) => {
         console.log("OKOKOK");
         socket.emit("displayMessage", (obj));
     });
+
+    socket.on('getSocket', (socket) => {
+        socket.emit('setSockeId', socket.id)
+    })
 });
 
